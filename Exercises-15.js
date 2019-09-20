@@ -1,28 +1,65 @@
 function highestScore(students) {
   // Code disini
 
-  var kelas = {};
+  // var kelas = {};
+  // for (var i = 0; i < students.length; i++) {
+  //   for (var j = 0; j < students.length; j++) {
+  //     if (
+  //       students[i]["score"] < students[j]["score"] &&
+  //       students[i]["class"] == students[j]["class"]
+  //     ) {
+  //       var temp = students[j];
+  //       students[j] = students[i];
+  //       students[i] = temp;
+  //     }
+  //   }
+  // }
+  // console.log(students);
+  // for (var i = 0; i < students.length; i++) {
+  //   var data = {
+  //     name: students[i]["name"],
+  //     score: students[i]["score"]
+  //   };
+  //   kelas[students[i]["class"]] = data;
+  // }
+  // return kelas;
+  var kelas = [];
   for (var i = 0; i < students.length; i++) {
+    var udahAda = false;
+    for (var j = 0; j < kelas.length; j++) {
+      if (students[i]["class"] == kelas[j]) {
+        udahAda = true;
+      }
+    }
+    if (udahAda == false) {
+      kelas.push(students[i]["class"]);
+    }
+  }
+  var tertinggi = [];
+  for (var i = 0; i < kelas.length; i++) {
     for (var j = 0; j < students.length; j++) {
-      if (
-        students[i]["score"] < students[j]["score"] &&
-        students[i]["class"] == students[j]["class"]
-      ) {
-        var temp = students[j];
-        students[j] = students[i];
-        students[i] = temp;
+      if (students[j]["class"] == kelas[i]) {
+        if (tertinggi[i] == undefined) {
+          tertinggi[i] = [];
+          tertinggi[i].push(students[j]["name"], students[j]["score"]);
+        }
+        if (tertinggi[i][1] < students[j]["score"]) {
+          tertinggi[i][0] = students[j]["name"];
+          tertinggi[i][1] = students[j]["score"];
+        }
       }
     }
   }
-
-  for (var i = 0; i < students.length; i++) {
-    var data = {
-      name: students[i]["name"],
-      score: students[i]["score"]
-    };
-    kelas[students[i]["class"]] = data;
+  console.log(kelas);
+  console.log(tertinggi);
+  var result = {};
+  for (var i = 0; i < kelas.length; i++) {
+    var data = {};
+    data["name"] = tertinggi[i][0];
+    data["score"] = tertinggi[i][1];
+    result[kelas[i]] = data;
   }
-  return kelas;
+  return result;
 }
 
 // TEST CASE
@@ -30,7 +67,7 @@ console.log(
   highestScore([
     {
       name: "Dimitri",
-      score: 90,
+      score: 70,
       class: "foxes"
     },
     {
@@ -85,7 +122,8 @@ console.log(
     }
   ])
 );
-
+// ['foxes', 'wolves', 'tigers']
+// ['Alexander','Alisa']
 // {
 //   foxes: { name: 'Alexander', score: 100 },
 //   wolves: { name: 'Alisa', score: 76 },

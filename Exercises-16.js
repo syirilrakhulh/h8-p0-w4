@@ -11,8 +11,8 @@ function graduates(students) {
       data["name"] = students[j]["name"];
       data["score"] = students[j]["score"];
       kelas[students[j]["class"]].push(data);
-      // console.log(kelas);
     }
+    //   // {name : bram, score : 100}
   }
   return kelas;
 }
@@ -24,6 +24,7 @@ console.log(
       score: 90,
       class: "foxes"
     },
+    { name: "syiril", score: 85, class: "wolves" },
     {
       name: "Alexei",
       score: 85,
@@ -76,7 +77,7 @@ console.log(
     },
     {
       name: "Viktor",
-      score: 80,
+      score: 70,
       class: "tigers"
     }
   ])

@@ -5,6 +5,9 @@ function countProfit(shoppers) {
     ["Sweater Uniklooh", 175000, 1]
   ];
   var output = [];
+  if (shoppers.length == 0) {
+    return output;
+  }
   for (var i = 0; i < listBarang.length; i++) {
     var objek = {};
     objek["product"] = listBarang[i][0];
